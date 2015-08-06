@@ -9,7 +9,6 @@
   "description": "",
   "permissions": [
     "webRequest",
-    "storage",
     "http://sssslide.com/*",
     "*://www.slideshare.net/*",
     "*://speakerdeck.com/*"

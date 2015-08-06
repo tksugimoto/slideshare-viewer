@@ -11,8 +11,23 @@ $(function() {
     function preload(baseUrl, pn) {
         $('<img/>').attr("src", buildUrl(baseUrl, pn));
     }
+    
+    var url = location.hash.replace(/^#/, "");
+    var protocol = url.match("^(http|https)://");
+    if (protocol) {
+      var sssslideUrl = "http://sssslide.com/" + url.substr(protocol[0].length);
+      $.get(sssslideUrl, function (data) {
+        var metadata = $(data).filter("#js__slide");
+        start({
+          total: parseInt(metadata.attr("data-total-slides")),
+          //      type: site,
+          baseUrl: metadata.attr("data-image-url-template"),
+          title: $(data).filter("meta[property='og:title']").attr("content")
+        });
+      });
+    }
 
-    chrome.storage.local.get(function(s) {
+    function start(s) {
         var pn = 1,
             slideImage = $("#slide-image");
 
@@ -44,6 +59,7 @@ $(function() {
         $("#slide-progress").progress({percent: 0});
         $("#slide-position").text(pn + "/" + s.total);
         $("#slide-title").text(s.title);
+        document.title = s.title;
         $("#prev").on("click", prevPage);
         $("#next").on("click", nextPage);
         $("#btn-fullscreen").on("click", function(e) {
@@ -59,5 +75,5 @@ $(function() {
                 break;
             }
         });
-    });
+    }
 });
