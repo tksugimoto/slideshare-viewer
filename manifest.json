@@ -12,8 +12,5 @@
     "http://sssslide.com/*",
     "*://www.slideshare.net/*",
     "*://speakerdeck.com/*"
-  ],
-  "web_accessible_resources": [
-    "slide.html"
   ]
 }
