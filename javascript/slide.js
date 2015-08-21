@@ -69,10 +69,10 @@ $(function() {
             switch(e.which) {
             case 37:
                 prevPage(e);
-                break;
+                return false;
             case 39:
                 nextPage(e);
-                break;
+                return false;
             }
         });
     }
